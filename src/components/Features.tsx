@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BookOpen, WifiOff, Settings2 } from 'lucide-react';
+import { BookOpen, WifiOff, Settings2, LayoutTemplate } from 'lucide-react';
 
 const features = [
   {
@@ -25,6 +25,14 @@ const features = [
     imageDark: "/screenshots/settings.png",
     imageLight: "/screenshots/white-settings.png",
     reversed: false,
+  },
+  {
+    title: "Layout della Home",
+    description: "Modifica e riorganizza la schermata principale secondo le tue esigenze. Scegli cosa avere a portata di mano per un'esperienza su misura.",
+    icon: <LayoutTemplate className="w-6 h-6 text-accent" />,
+    imageDark: "/screenshots/layoutedit.png",
+    imageLight: "/screenshots/white-layoutedit.png",
+    reversed: true,
   }
 ];
 

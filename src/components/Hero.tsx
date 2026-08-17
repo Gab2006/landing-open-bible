@@ -8,7 +8,17 @@ export default function Hero({ darkMode }: { darkMode: boolean }) {
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6">
+      {/* Sfondo ad arco con l'icona dell'app */}
+      <motion.img
+        src="/nobg-icon.png"
+        alt=""
+        initial={{ opacity: 0 }}
+        animate={{ opacity: darkMode ? 0.08 : 0.15 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60rem] sm:w-[80rem] md:w-[100rem] lg:w-[120rem] object-contain pointer-events-none z-0"
+      />
+      
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}

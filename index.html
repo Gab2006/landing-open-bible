@@ -2,7 +2,9 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     
     <!-- Google Fonts: Inter and Crimson Pro -->
@@ -13,7 +15,22 @@
     <title>OpenBible - La Parola, senza distrazioni</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #FAF6EF;" id="initial-loader">
+        <img src="/nobg-icon.png" alt="Caricamento..." style="width: 80px; height: 80px; animation: spin-slow 3s linear infinite;" />
+        <style>
+          @keyframes spin-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          @media (prefers-color-scheme: dark) {
+            #initial-loader {
+              background-color: #1A1917 !important;
+            }
+          }
+        </style>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
