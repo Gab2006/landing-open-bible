@@ -106,7 +106,7 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                     >
                       <li className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">1</div>
-                        <p>Apri l'app su <strong>Safari</strong>.</p>
+                        <p>Vai su <a href="https://openbible-read.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold">openbible-read.vercel.app</a> usando <strong>Safari</strong>.</p>
                       </li>
                       <li className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">2</div>
@@ -128,7 +128,7 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                     >
                       <li className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">1</div>
-                        <p>Apri l'app su <strong>Chrome</strong>.</p>
+                        <p>Vai su <a href="https://openbible-read.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold">openbible-read.vercel.app</a> usando <strong>Chrome</strong>.</p>
                       </li>
                       <li className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">2</div>
