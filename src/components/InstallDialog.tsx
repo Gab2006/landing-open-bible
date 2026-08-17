@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Apple, Smartphone, Share, PlusSquare, MoreVertical, MoreHorizontal } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface InstallDialogProps {
@@ -10,6 +10,35 @@ interface InstallDialogProps {
 
 export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
   const [os, setOs] = useState<'ios' | 'android'>('ios');
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const listVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1 } },
+    exit: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+  };
+
+  const iosItemVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 10 }
+  };
+
+  const androidItemVariants = {
+    hidden: { opacity: 0, x: 10 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -10 }
+  };
 
   return (
     <AnimatePresence>
@@ -92,60 +121,60 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
               </motion.div>
 
               <motion.div layout="position" className="space-y-4 text-light-text dark:text-dark-text text-sm">
-                <AnimatePresence mode="popLayout">
+                <AnimatePresence mode="wait">
                   {os === 'ios' ? (
                     <motion.ol
                       layout="position"
                       key="ios-instructions"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: 10 }}
-                      transition={{ duration: 0.2 }}
+                      variants={listVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
                       className="space-y-4"
                     >
-                      <li className="flex gap-3 items-start">
+                      <motion.li variants={iosItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">1</div>
                         <p>Vai su <a href="https://openbible-read.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold">openbible-read.vercel.app</a> usando <strong>Safari</strong>.</p>
-                      </li>
-                      <li className="flex gap-3 items-start">
+                      </motion.li>
+                      <motion.li variants={iosItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">2</div>
                         <p>Tocca l'icona con i tre puntini <MoreHorizontal size={16} className="inline mx-1" />.</p>
-                      </li>
-                      <li className="flex gap-3 items-start">
+                      </motion.li>
+                      <motion.li variants={iosItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">3</div>
                         <p>Tocca <strong>"Condividi"</strong> <Share size={16} className="inline mx-1" />.</p>
-                      </li>
-                      <li className="flex gap-3 items-start">
+                      </motion.li>
+                      <motion.li variants={iosItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">4</div>
                         <p>Tocca <strong>"Visualizza altro"</strong>.</p>
-                      </li>
-                      <li className="flex gap-3 items-start">
+                      </motion.li>
+                      <motion.li variants={iosItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">5</div>
                         <p>Tocca <strong>"Aggiungi alla schermata Home"</strong> <PlusSquare size={16} className="inline mx-1" />.</p>
-                      </li>
+                      </motion.li>
                     </motion.ol>
                   ) : (
                     <motion.ol
                       layout="position"
                       key="android-instructions"
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -10 }}
-                      transition={{ duration: 0.2 }}
+                      variants={listVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
                       className="space-y-4"
                     >
-                      <li className="flex gap-3 items-start">
+                      <motion.li variants={androidItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">1</div>
                         <p>Vai su <a href="https://openbible-read.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold">openbible-read.vercel.app</a> usando <strong>Chrome</strong>.</p>
-                      </li>
-                      <li className="flex gap-3 items-start">
+                      </motion.li>
+                      <motion.li variants={androidItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">2</div>
                         <p>Tocca l'icona del Menu <MoreVertical size={16} className="inline mx-1" /> in alto a destra.</p>
-                      </li>
-                      <li className="flex gap-3 items-start">
+                      </motion.li>
+                      <motion.li variants={androidItemVariants} className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">3</div>
                         <p>Seleziona <strong>"Installa app"</strong> o <strong>"Aggiungi a schermata Home"</strong>.</p>
-                      </li>
+                      </motion.li>
                     </motion.ol>
                   )}
                 </AnimatePresence>
