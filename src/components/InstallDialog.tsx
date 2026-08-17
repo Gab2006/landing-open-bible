@@ -16,27 +16,25 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
       {isOpen && (
         <motion.div
           key="install-dialog-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+          animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
+          exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40"
+          onClick={onClose}
         >
-          {/* Backdrop */}
-          <div
-            onClick={onClose}
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-          />
-
           {/* Dialog */}
           <motion.div
+            layout
             key="install-dialog-content"
             initial={{ scale: 0.95, y: 20, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.95, y: 20, opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             onClick={(e) => e.stopPropagation()}
             className="bg-light-bg dark:bg-dark-bg w-full max-w-md rounded-2xl shadow-xl overflow-hidden relative z-10 border border-black/10 dark:border-white/10"
           >
-            <div className="flex justify-between items-center p-4 border-b border-black/5 dark:border-white/5">
+            <motion.div layout="position" className="flex justify-between items-center p-4 border-b border-black/5 dark:border-white/5">
               <h3 className="font-serif text-xl font-semibold text-light-text dark:text-dark-text">
                 Installa l'App
               </h3>
@@ -46,11 +44,11 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
               >
                 <X size={20} />
               </button>
-            </div>
+            </motion.div>
 
             <div className="p-4">
               {/* OS Toggle with Sliding Background */}
-              <div className="flex gap-2 p-1 bg-black/5 dark:bg-white/5 rounded-lg mb-6 relative">
+              <motion.div layout="position" className="flex gap-2 p-1 bg-black/5 dark:bg-white/5 rounded-lg mb-6 relative">
                 <button
                   onClick={() => setOs('ios')}
                   className={twMerge(
@@ -91,12 +89,13 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                     <Smartphone size={16} /> Android
                   </span>
                 </button>
-              </div>
+              </motion.div>
 
-              <div className="space-y-4 text-light-text dark:text-dark-text text-sm min-h-[160px]">
-                <AnimatePresence mode="wait">
+              <motion.div layout="position" className="space-y-4 text-light-text dark:text-dark-text text-sm">
+                <AnimatePresence mode="popLayout">
                   {os === 'ios' ? (
                     <motion.ol
+                      layout="position"
                       key="ios-instructions"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -127,6 +126,7 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                     </motion.ol>
                   ) : (
                     <motion.ol
+                      layout="position"
                       key="android-instructions"
                       initial={{ opacity: 0, x: 10 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -149,16 +149,16 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                     </motion.ol>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
 
-              <div className="mt-8">
+              <motion.div layout="position" className="mt-8">
                 <button
                   onClick={onClose}
                   className="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3 rounded-xl transition-colors"
                 >
                   Ho capito
                 </button>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>
