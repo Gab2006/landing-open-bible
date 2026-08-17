@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Apple, Smartphone, Share, PlusSquare, MoreVertical } from 'lucide-react';
+import { X, Apple, Smartphone, Share, PlusSquare, MoreVertical, MoreHorizontal } from 'lucide-react';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -14,7 +14,7 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <motion.div
           key="install-dialog-overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -26,7 +26,7 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
             onClick={onClose}
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
           />
-          
+
           {/* Dialog */}
           <motion.div
             key="install-dialog-content"
@@ -55,8 +55,8 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                   onClick={() => setOs('ios')}
                   className={twMerge(
                     "relative flex-1 flex justify-center items-center py-2 text-sm font-medium rounded-md transition-colors",
-                    os === 'ios' 
-                      ? "text-light-text" 
+                    os === 'ios'
+                      ? "text-light-text"
                       : "text-light-text/60 dark:text-dark-text/60 hover:text-light-text dark:hover:text-dark-text"
                   )}
                 >
@@ -75,8 +75,8 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                   onClick={() => setOs('android')}
                   className={twMerge(
                     "relative flex-1 flex justify-center items-center py-2 text-sm font-medium rounded-md transition-colors",
-                    os === 'android' 
-                      ? "text-light-text" 
+                    os === 'android'
+                      ? "text-light-text"
                       : "text-light-text/60 dark:text-dark-text/60 hover:text-light-text dark:hover:text-dark-text"
                   )}
                 >
@@ -96,7 +96,7 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
               <div className="space-y-4 text-light-text dark:text-dark-text text-sm min-h-[160px]">
                 <AnimatePresence mode="wait">
                   {os === 'ios' ? (
-                    <motion.ol 
+                    <motion.ol
                       key="ios-instructions"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -110,15 +110,23 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
                       </li>
                       <li className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">2</div>
-                        <p>Tocca l'icona Condividi <Share size={16} className="inline mx-1" /> in basso.</p>
+                        <p>Tocca l'icona con i tre puntini <MoreHorizontal size={16} className="inline mx-1" />.</p>
                       </li>
                       <li className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">3</div>
-                        <p>Scorri e seleziona <strong>"Aggiungi alla schermata Home"</strong> <PlusSquare size={16} className="inline mx-1" />.</p>
+                        <p>Tocca <strong>"Condividi"</strong> <Share size={16} className="inline mx-1" />.</p>
+                      </li>
+                      <li className="flex gap-3 items-start">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">4</div>
+                        <p>Tocca <strong>"Visualizza altro"</strong>.</p>
+                      </li>
+                      <li className="flex gap-3 items-start">
+                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center font-semibold">5</div>
+                        <p>Tocca <strong>"Aggiungi alla schermata Home"</strong> <PlusSquare size={16} className="inline mx-1" />.</p>
                       </li>
                     </motion.ol>
                   ) : (
-                    <motion.ol 
+                    <motion.ol
                       key="android-instructions"
                       initial={{ opacity: 0, x: 10 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -144,7 +152,7 @@ export default function InstallDialog({ isOpen, onClose }: InstallDialogProps) {
               </div>
 
               <div className="mt-8">
-                <button 
+                <button
                   onClick={onClose}
                   className="w-full bg-accent hover:bg-accent/90 text-white font-medium py-3 rounded-xl transition-colors"
                 >
