@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { BookOpen, WifiOff, Settings2, LayoutTemplate } from 'lucide-react';
+import PhoneMockup from './PhoneMockup';
 
 const features = [
   {
@@ -38,7 +39,7 @@ const features = [
 
 export default function Features({ darkMode }: { darkMode: boolean }) {
   return (
-    <section className="py-24 bg-black/5 dark:bg-white/5">
+    <section className="py-24 bg-black/5 dark:bg-white/5" id="funzionalita">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-20">
           <h2 className="font-serif text-3xl lg:text-4xl font-bold text-light-text dark:text-dark-text mb-4">
@@ -78,15 +79,18 @@ export default function Features({ darkMode }: { darkMode: boolean }) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="flex-1 w-full max-w-sm mx-auto lg:max-w-none"
+                className="flex-1 w-full max-w-sm mx-auto lg:max-w-none relative"
               >
-                <div className="w-full rounded-[2.5rem] shadow-2xl border border-black/10 dark:border-white/10 overflow-hidden bg-white dark:bg-[#1A1917]">
-                  <img
+                <div className="absolute inset-0 bg-accent/10 blur-[60px] rounded-full scale-75" />
+                <PhoneMockup darkMode={darkMode}>
+                  <motion.img
                     src={darkMode ? feature.imageDark : feature.imageLight}
                     alt={feature.title}
-                    className="w-full block scale-[1.03]"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-full h-auto block scale-[1.03] origin-top cursor-default"
                   />
-                </div>
+                </PhoneMockup>
               </motion.div>
             </div>
           ))}

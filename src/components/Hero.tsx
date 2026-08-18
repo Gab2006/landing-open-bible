@@ -2,6 +2,9 @@ import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 import { useState } from 'react';
 import InstallDialog from './InstallDialog';
+import PhoneMockup from './PhoneMockup';
+import FloatingParticles from './FloatingParticles';
+
 
 export default function Hero({ darkMode }: { darkMode: boolean }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -18,6 +21,7 @@ export default function Hero({ darkMode }: { darkMode: boolean }) {
         className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60rem] sm:w-[80rem] md:w-[100rem] lg:w-[120rem] object-contain pointer-events-none z-0"
       />
       
+      <FloatingParticles darkMode={darkMode} />
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <motion.div 
@@ -51,14 +55,19 @@ export default function Hero({ darkMode }: { darkMode: boolean }) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex-1 w-full max-w-sm lg:max-w-md relative"
           >
-            <div className="absolute inset-0 bg-accent/20 blur-3xl rounded-full" />
-            <div className="relative z-10 w-full rounded-[2.5rem] shadow-2xl border-4 border-white/10 overflow-hidden bg-white dark:bg-[#1A1917]">
+            <div className="absolute inset-0 bg-accent/30 blur-[80px] rounded-full scale-90" />
+            
+            <PhoneMockup 
+              darkMode={darkMode}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+            >
               <img 
                 src={darkMode ? "/screenshots/homepage.png" : "/screenshots/white-homepage.png"}
                 alt="OpenBible Homepage" 
-                className="w-full block scale-[1.03]"
+                className="w-full h-auto object-cover scale-[1.03] origin-top"
               />
-            </div>
+            </PhoneMockup>
           </motion.div>
         </div>
       </div>

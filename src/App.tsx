@@ -3,6 +3,8 @@ import Lenis from 'lenis';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Features from './components/Features';
+import VerseOfTheDay from './components/VerseOfTheDay';
+import FinalCta from './components/FinalCta';
 import Footer from './components/Footer';
 
 function App() {
@@ -26,7 +28,11 @@ function App() {
     const lenis = new Lenis({
       autoRaf: true,
     });
-    return () => lenis.destroy();
+    (window as any).lenis = lenis;
+    return () => {
+      lenis.destroy();
+      delete (window as any).lenis;
+    };
   }, []);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
@@ -37,7 +43,9 @@ function App() {
       
       <main>
         <Hero darkMode={darkMode} />
+        <VerseOfTheDay />
         <Features darkMode={darkMode} />
+        <FinalCta />
       </main>
 
       <Footer />
