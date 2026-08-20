@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, WifiOff, Settings2, LayoutTemplate } from 'lucide-react';
 import PhoneMockup from './PhoneMockup';
+import ImageModal from './ImageModal';
 
 const features = [
   {
@@ -38,6 +40,8 @@ const features = [
 ];
 
 export default function Features({ darkMode }: { darkMode: boolean }) {
+  const [modalImage, setModalImage] = useState<{ src: string, alt: string } | null>(null);
+
   return (
     <section className="py-24 bg-black/5 dark:bg-white/5" id="funzionalita">
       <div className="max-w-5xl mx-auto px-6">
@@ -86,9 +90,9 @@ export default function Features({ darkMode }: { darkMode: boolean }) {
                   <motion.img
                     src={darkMode ? feature.imageDark : feature.imageLight}
                     alt={feature.title}
-                    whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.4 }}
-                    className="w-full h-auto block scale-[1.03] origin-top cursor-default"
+                    className="w-full h-auto block cursor-pointer"
+                    onClick={() => setModalImage({ src: darkMode ? feature.imageDark : feature.imageLight, alt: feature.title })}
                   />
                 </PhoneMockup>
               </motion.div>
@@ -96,6 +100,13 @@ export default function Features({ darkMode }: { darkMode: boolean }) {
           ))}
         </div>
       </div>
+
+      <ImageModal 
+        isOpen={!!modalImage} 
+        onClose={() => setModalImage(null)} 
+        imageSrc={modalImage?.src || ''} 
+        alt={modalImage?.alt || ''} 
+      />
     </section>
   );
 }

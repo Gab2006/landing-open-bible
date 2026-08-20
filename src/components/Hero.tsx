@@ -4,10 +4,12 @@ import { useState } from 'react';
 import InstallDialog from './InstallDialog';
 import PhoneMockup from './PhoneMockup';
 import FloatingParticles from './FloatingParticles';
+import ImageModal from './ImageModal';
 
 
 export default function Hero({ darkMode }: { darkMode: boolean }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [modalImage, setModalImage] = useState<string | null>(null);
 
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
@@ -65,7 +67,8 @@ export default function Hero({ darkMode }: { darkMode: boolean }) {
               <img 
                 src={darkMode ? "/screenshots/homepage.png" : "/screenshots/white-homepage.png"}
                 alt="OpenBible Homepage" 
-                className="w-full h-auto object-cover scale-[1.03] origin-top"
+                className="w-full h-auto object-cover cursor-pointer"
+                onClick={() => setModalImage(darkMode ? "/screenshots/homepage.png" : "/screenshots/white-homepage.png")}
               />
             </PhoneMockup>
           </motion.div>
@@ -73,6 +76,12 @@ export default function Hero({ darkMode }: { darkMode: boolean }) {
       </div>
 
       <InstallDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
+      <ImageModal 
+        isOpen={!!modalImage} 
+        onClose={() => setModalImage(null)} 
+        imageSrc={modalImage || ''} 
+        alt="OpenBible Homepage Screenshot" 
+      />
     </section>
   );
 }
